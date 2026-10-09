@@ -1,83 +1,81 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-// Student details
-const student1Name = "Anu";
-const student1Department = "CSE";
-const student1Year = "3rd Year";
-
-// Header Component
 function Header() {
-  return <h1 className="header">Student Management System</h1>;
+  return <h1 className="header">Amazon Product Store</h1>;
 }
 
-// StudentProfile Component
-function StudentProfile({ name, department, year, count }) {
+function ProductCard({ productName, price, quantity, selectedColor, deliveryCity }) {
   useEffect(() => {
     const previousTitle = document.title;
-
-    document.title = `Practice Sessions: ${count}`;
+    document.title = `${productName} | ${selectedColor} | Cart: ${quantity}`;
 
     return () => {
       document.title = previousTitle;
     };
-  }, [count]);
+  }, [productName, selectedColor, quantity]);
+
+  const totalAmount = quantity * price;
 
   return (
-    <div className="student-profile">
-      <p>
-        <strong>Name:</strong> {name}
-      </p>
-      <p>
-        <strong>Department:</strong> {department}
-      </p>
-      <p>
-        <strong>Year:</strong> {year}
-      </p>
-
-      <p>
-        <strong>Practice Sessions:</strong> {count}
-      </p>
+    <div className="product-card">
+      <h2>Product Details</h2>
+      <p><strong>Product:</strong> {productName}</p>
+      <p><strong>Price:</strong> ₹{price}</p>
+      <p><strong>Colour:</strong> {selectedColor}</p>
+      <p><strong>Deliver to:</strong> {deliveryCity}</p>
+      <p><strong>Cart Quantity:</strong> {quantity}</p>
+      <p><strong>Total Amount:</strong> ₹{totalAmount}</p>
+      <p><strong>Status:</strong> {quantity === 0 ? "Cart is empty" : "Product added to cart"}</p>
     </div>
   );
 }
 
-// Footer Component
 function Footer() {
-  return <footer>© 2026 Student Management System</footer>;
+  return <footer>© 2026 Amazon Product Store</footer>;
 }
 
-// Main App Component
 function App() {
-  const [practiceCount, setPracticeCount] = useState(0);
-  const [showProfile, setShowProfile] = useState(true);
+  const [quantity, setQuantity] = useState(0);
+  const [selectedColor, setSelectedColor] = useState("Black");
+  const [deliveryCity, setDeliveryCity] = useState("Coimbatore");
+  const [showProduct, setShowProduct] = useState(true);
+
+  const productName = "Wireless Mouse";
+  const price = 499;
 
   return (
     <div className="app">
       <Header />
 
-      <h2>Student Profile</h2>
+      <div className="controls">
+        <label htmlFor="color">Select Colour:</label>
+        <select id="color" value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}>
+          <option value="Black">Black</option>
+          <option value="Blue">Blue</option>
+          <option value="White">White</option>
+        </select>
 
-      <button onClick={() => setShowProfile(!showProfile)}>
-        {showProfile ? "Hide Profile" : "Show Profile"}
-      </button>
+        <label htmlFor="city">Delivery City:</label>
+        <input id="city" type="text" value={deliveryCity} onChange={(e) => setDeliveryCity(e.target.value)} />
 
-      {showProfile && (
-        <StudentProfile
-          name={student1Name}
-          department={student1Department}
-          year={student1Year}
-          count={practiceCount}
+        <div className="buttons">
+          <button onClick={() => setQuantity(q => q + 1)}>Add to Cart</button>
+          <button onClick={() => setQuantity(q => Math.max(0, q - 1))} disabled={quantity === 0}>Remove One</button>
+          <button onClick={() => setQuantity(0)}>Reset Cart</button>
+          <button onClick={() => setShowProduct(v => !v)}>{showProduct ? "Hide Product" : "Show Product"}</button>
+        </div>
+      </div>
+
+      {showProduct && (
+        <ProductCard
+          productName={productName}
+          price={price}
+          quantity={quantity}
+          selectedColor={selectedColor}
+          deliveryCity={deliveryCity}
         />
       )}
-
-      <div className="practice-buttons">
-        <button onClick={() => setPracticeCount(practiceCount + 1)}>
-          Complete Practice
-        </button>
-
-        <button onClick={() => setPracticeCount(0)}>Reset</button>
-      </div>
 
       <Footer />
     </div>

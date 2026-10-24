@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 const API_URL = (
-  import.meta.env.VITE_API_URL || "http://localhost:5000"
+  import.meta.env.VITE_API_URL || "https://7399304fb1f4-0af409cb-5300.ws6.app/proxy/5000/"
 ).replace(/\/+$/, "");
 
 const internships = [

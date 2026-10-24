@@ -1,27 +1,289 @@
-.app {
-  text-align: center;
+```css
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
   font-family: Arial, sans-serif;
-  padding: 20px;
+  background-color: #f3f4f6;
+  color: #232f3e;
 }
 
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
 .header {
-  color: blue;
+  width: 100%;
+  margin: 0;
+  padding: 5px 18px 17px;
+  background-color: #131921;
+  color: #ff9900;
+  font-size: 22px;
+  font-weight: normal;
 }
 
-.student-profile {
-  border: 2px solid black;
-  padding: 15px;
-  margin: 10px auto 20px;
-  width: 300px;
-  text-align: left;
+/* Tab information */
+.tab-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-height: 34px;
+  padding: 8px 18px;
+  background-color: #edf1f4;
+  font-size: 12px;
 }
 
-.student-profile p {
-  margin: 8px 0;
+.tab-bar span:first-child {
+  color: #657487;
 }
 
+/* Main content */
+.main-content {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* Product card */
+.product-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  margin: 20px 0;
+  padding: 18px;
+  background-color: #fff;
+  border: 1px solid #d9dfe5;
+  border-radius: 9px;
+}
+
+/* Product image */
+.product-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 124px;
+  height: 207px;
+  overflow: hidden;
+  background-color: #edf1f4;
+  border-radius: 8px;
+}
+
+.product-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* Product details */
+.product-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-info h2 {
+  margin: 0 0 7px;
+  color: #232f3e;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.product-info p {
+  margin: 5px 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.product-info .price {
+  margin-bottom: 14px;
+}
+
+.price strong {
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.price span {
+  margin-left: 4px;
+  color: #56616f;
+  font-size: 12px;
+}
+
+.detail-label {
+  color: #56616f;
+}
+
+.product-info hr {
+  margin: 14px 0;
+  border: 0;
+  border-top: 1px solid #d9dfe5;
+}
+
+.product-info .cart-quantity {
+  margin-top: 12px;
+  color: #56616f;
+}
+
+.product-info .total-amount {
+  font-size: 16px;
+}
+
+.product-info .status {
+  color: #657487;
+}
+
+/* Form controls */
+.controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+  padding-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.form-group label {
+  font-size: 13px;
+}
+
+select,
+input {
+  width: 100%;
+  min-width: 0;
+  height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #d5dbe1;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #232f3e;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+select:focus,
+input:focus {
+  outline: 2px solid #8ab4f8;
+  outline-offset: 1px;
+}
+
+/* Buttons */
+.buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 2px;
+}
+
+button {
+  min-height: 38px;
+  padding: 9px 14px;
+  border: 1px solid #d9dfe5;
+  border-radius: 22px;
+  background-color: #fff;
+  color: #232f3e;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #f0f2f2;
+}
+
+button.add-button {
+  background-color: #ffd814;
+  border-color: #ffd814;
+}
+
+button.add-button:hover:not(:disabled) {
+  background-color: #f7ca00;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Footer */
 footer {
-  margin-top: 30px;
-  padding: 15px;
-  background-color: #f0f0f0;
+  width: 100%;
+  margin-top: auto;
+  padding: 14px;
+  border-top: 1px solid #e0e4e8;
+  background-color: #fff;
+  color: #56616f;
+  text-align: center;
+  font-size: 12px;
 }
+
+/* Mobile layout */
+@media (max-width: 500px) {
+  .header {
+    font-size: 20px;
+  }
+
+  .main-content {
+    padding: 0 12px;
+  }
+
+  .product-card {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .product-image {
+    width: 95px;
+    height: 160px;
+  }
+
+  .product-info h2 {
+    font-size: 17px;
+  }
+
+  .product-info p {
+    font-size: 12px;
+  }
+
+  .controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .buttons {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 350px) {
+  .product-card {
+    flex-direction: column;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 150px;
+  }
+}
+```
